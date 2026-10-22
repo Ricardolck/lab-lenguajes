@@ -173,3 +173,44 @@ export type TestPreview = Pick<Test, "id" | "title" | "subject" | "status"> & {
 
 // Cuántos tests hay en cada estado
 export type TestsByStatus = Record<TestStatus, number>;
+
+// ─── Funciones puras ────────────────────────────────────────────
+
+// Corrige una respuesta según el tipo de pregunta. En cada case, TypeScript
+// sabe qué campos tiene la pregunta (correctIndex, correct…).
+export const checkAnswer = (question: Question, given: Answer["given"]): boolean => {
+  switch (question.type) {
+    case "single":
+      return given === question.correctIndex;
+    case "multiple":
+      return (
+        Array.isArray(given) &&
+        given.length === question.correctIndexes.length &&
+        question.correctIndexes.every((index) => given.includes(index))
+      );
+    case "true-false":
+      return given === question.correct;
+    case "short":
+      return (
+        typeof given === "string" &&
+        question.acceptedAnswers.some(
+          (accepted) => accepted.trim().toLowerCase() === given.trim().toLowerCase()
+        )
+      );
+  }
+};
+
+// Aplica los cambios y devuelve un test nuevo. La fecha llega como argumento
+// (no se lee el reloj aquí dentro), así que con la misma entrada da la misma salida.
+export const updateTest = (test: Test, changes: TestChanges, now: string): Test => ({
+  ...test,
+  ...changes,
+  updatedAt: now,
+});
+
+// Cuántos tests hay en cada estado, con reduce y sin mutar el acumulador
+export const countTestsByStatus = (tests: Test[]): TestsByStatus =>
+  tests.reduce(
+    (counts, test) => ({ ...counts, [test.status]: counts[test.status] + 1 }),
+    { generating: 0, draft: 0, ready: 0, archived: 0 }
+  );

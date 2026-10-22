@@ -1,3 +1,4 @@
+import { produce } from "immer";
 import { coffees } from "./data";
 import { formatPrice } from "./o02-funciones";
 import { finalPrice } from "./o04-opcionales";
@@ -63,6 +64,50 @@ export function createCartHistory(): CartHistory {
   };
 }
 
+export type CartAction =
+  | { type: "add"; coffeeId: number }
+  | { type: "remove"; coffeeId: number }
+  | { type: "changeQuantity"; coffeeId: number; quantity: number }
+  | { type: "clear" };
+
+// Dentro de produce se puede mutar: push, splice y quantity += 1 actúan
+// sobre el borrador, y Immer devuelve un carrito nuevo.
+export const cartReducer = (state: Cart, action: CartAction): Cart =>
+  produce(state, (draft) => {
+    switch (action.type) {
+      case "add": {
+        const item = draft.find((i) => i.coffeeId === action.coffeeId);
+        if (item) {
+          item.quantity += 1;
+        } else {
+          draft.push({ coffeeId: action.coffeeId, quantity: 1 });
+        }
+        break;
+      }
+      case "remove": {
+        const index = draft.findIndex((i) => i.coffeeId === action.coffeeId);
+        if (index !== -1) {
+          draft.splice(index, 1);
+        }
+        break;
+      }
+      case "changeQuantity": {
+        const index = draft.findIndex((i) => i.coffeeId === action.coffeeId);
+        if (index === -1) {
+          break;
+        }
+        if (action.quantity <= 0) {
+          draft.splice(index, 1);
+        } else {
+          draft[index].quantity = action.quantity;
+        }
+        break;
+      }
+      case "clear":
+        return []; // un valor nuevo en vez de mutar el borrador
+    }
+  });
+
 const empty: Cart = [];
 const cart1 = addToCart(empty, 1);
 const cart2 = addToCart(cart1, 4);
@@ -98,3 +143,20 @@ console.log(history.current()); // → [{ coffeeId: 1, quantity: 1 }]
 history.undo();
 history.undo(); // de más: no pasa de vacío
 console.log(history.current()); // → []
+
+// Reducer con acciones
+const actions: CartAction[] = [
+  { type: "add", coffeeId: 1 },
+  { type: "add", coffeeId: 4 },
+  { type: "add", coffeeId: 1 },
+  { type: "changeQuantity", coffeeId: 4, quantity: 3 },
+  { type: "add", coffeeId: 5 },
+  { type: "remove", coffeeId: 1 },
+];
+
+const finalCart = actions.reduce(cartReducer, []);
+console.log(finalCart); // → [{ coffeeId: 4, quantity: 3 }, { coffeeId: 5, quantity: 1 }]
+console.log(formatPrice(cartTotal(finalCart, coffees))); // → "42.72 €"
+
+console.log(cartReducer(finalCart, { type: "clear" })); // → []
+console.log(finalCart.length); // → 2. El carrito anterior no cambia

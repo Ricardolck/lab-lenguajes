@@ -22,10 +22,10 @@ npx tsx src/o06-carrito.ts
 
 ## Salida de las katas
 
-![alt text](./lab-lenguajes/docs/katas.png)
-![alt text](./lab-lenguajes/docs/katas-1.png)
-![alt text](./lab-lenguajes/docs/katas-2.png)
-![alt text](./lab-lenguajes/docs/katas-3.png)
+![alt text](./docs/katas.png)
+![alt text](./docs/katas-1.png)
+![alt text](./docs/katas-2.png)
+![alt text](./docs/katas-3.png)
 
 ## Comprobación de tipos
 
@@ -36,7 +36,7 @@ npx tsc
 
 Sale **sin errores** (código de salida 0). El `tsconfig.json` tiene `noUnusedLocals` y `noUnusedParameters`, así que tampoco quedan imports ni variables sin usar.
 
-![alt text](./lab-lenguajes/docs/npx.png)
+![alt text](./docs/npx.png)
 
 ## Estructura
 
@@ -68,19 +68,19 @@ Las respuestas están como comentarios en el código, junto a la kata a la que c
 
 | Kata | Pregunta | Respuesta |
 | --- | --- | --- |
-| o01 | ¿Qué pasa si `roast` vale `"extra"`? | [o01-tipos.ts:15](lab-lenguajes/src/o01-tipos.ts#L15). Error TS2322: `"extra"` no está en `Roast` |
-| o01 | ¿Y si falta `price`? | [o01-tipos.ts:30](lab-lenguajes/src/o01-tipos.ts#L30). Error TS2741: `price` es obligatoria |
-| o01 | ¿Se puede cambiar el `id`? | [o01-tipos.ts:38](lab-lenguajes/src/o01-tipos.ts#L38). Error TS2540: es `readonly` |
-| o02 | ¿Qué pasa si el `switch` no cubre todos los tuestes? | [o02-funciones.ts:26](lab-lenguajes/src/o02-funciones.ts#L26). Error TS2366: a la función le falta un `return` |
-| o03 | ¿Qué son los `...` de `sumAll(...coffees.map(...))`? | [o03-destructuring.ts:39](lab-lenguajes/src/o03-destructuring.ts#L39). Es *spread*, no *rest*: reparte el array en argumentos sueltos |
-| o04 | ¿Por qué `??` y no `\|\|`? | [o04-opcionales.ts:39](lab-lenguajes/src/o04-opcionales.ts#L39). Con `\|\|`, el `false` de Lucía se convierte en `true` |
-| o05 | ¿Cambia el orden de `coffees` si usamos `sort` en vez de `toSorted`? | [o05-arrays.ts:17](lab-lenguajes/src/o05-arrays.ts#L17). No, porque `sort` ordena la copia que devuelve `filter` |
-| o07 | ¿Cuáles son puras y qué condición rompen las impuras? | [o07-pureza.ts](lab-lenguajes/src/o07-pureza.ts). Comentario encima de cada función y versión pura de las impuras al final |
-| o08 | ¿Qué pasa si falta un estado en `statusLabel`? | [o08-uniones-genericos.ts:11](lab-lenguajes/src/o08-uniones-genericos.ts#L11). Error TS2741: `Record` exige todos los estados |
-| o10 | ¿Es pura `blackFriday`? | [o10-closures.ts:18](lab-lenguajes/src/o10-closures.ts#L18). Sí: el descuento capturado no cambia nunca |
-| o10 | ¿Por qué `.map(blackFriday)` va sin paréntesis? | [o10-closures.ts:24](lab-lenguajes/src/o10-closures.ts#L24). Porque a `map` se le pasa la función, no su resultado |
-| o10 | ¿Es pura `nextOrderId`? | [o10-closures.ts:27](lab-lenguajes/src/o10-closures.ts#L27). No: cada llamada cambia el contador y devuelve otra cosa |
-| o11 | ¿Qué es más legible, spread o Immer? ¿Cuándo usaríais cada uno? | [o11-immer.ts:51](lab-lenguajes/src/o11-immer.ts#L51) |
+| o01 | ¿Qué pasa si `roast` vale `"extra"`? | [o01-tipos.ts:15](src/o01-tipos.ts#L15). Error TS2322: `"extra"` no está en `Roast` |
+| o01 | ¿Y si falta `price`? | [o01-tipos.ts:30](src/o01-tipos.ts#L30). Error TS2741: `price` es obligatoria |
+| o01 | ¿Se puede cambiar el `id`? | [o01-tipos.ts:38](src/o01-tipos.ts#L38). Error TS2540: es `readonly` |
+| o02 | ¿Qué pasa si el `switch` no cubre todos los tuestes? | [o02-funciones.ts:26](src/o02-funciones.ts#L26). Error TS2366: a la función le falta un `return` |
+| o03 | ¿Qué son los `...` de `sumAll(...coffees.map(...))`? | [o03-destructuring.ts:39](src/o03-destructuring.ts#L39). Es *spread*, no *rest*: reparte el array en argumentos sueltos |
+| o04 | ¿Por qué `??` y no `\|\|`? | [o04-opcionales.ts:39](src/o04-opcionales.ts#L39). Con `\|\|`, el `false` de Lucía se convierte en `true` |
+| o05 | ¿Cambia el orden de `coffees` si usamos `sort` en vez de `toSorted`? | [o05-arrays.ts:17](src/o05-arrays.ts#L17). No, porque `sort` ordena la copia que devuelve `filter` |
+| o07 | ¿Cuáles son puras y qué condición rompen las impuras? | [o07-pureza.ts](src/o07-pureza.ts). Comentario encima de cada función y versión pura de las impuras al final |
+| o08 | ¿Qué pasa si falta un estado en `statusLabel`? | [o08-uniones-genericos.ts:11](src/o08-uniones-genericos.ts#L11). Error TS2741: `Record` exige todos los estados |
+| o10 | ¿Es pura `blackFriday`? | [o10-closures.ts:18](src/o10-closures.ts#L18). Sí: el descuento capturado no cambia nunca |
+| o10 | ¿Por qué `.map(blackFriday)` va sin paréntesis? | [o10-closures.ts:24](src/o10-closures.ts#L24). Porque a `map` se le pasa la función, no su resultado |
+| o10 | ¿Es pura `nextOrderId`? | [o10-closures.ts:27](src/o10-closures.ts#L27). No: cada llamada cambia el contador y devuelve otra cosa |
+| o11 | ¿Qué es más legible, spread o Immer? ¿Cuándo usaríais cada uno? | [o11-immer.ts:51](src/o11-immer.ts#L51) |
 
 ## Checklist
 
@@ -97,10 +97,12 @@ Las respuestas están como comentarios en el código, junto a la kata a la que c
 - [x] o11 · Immer (`movedSpread`, `movedImmer`, `upgraded`)
 - [x] `npx tsc` sin errores
 - [x] README + bitácora de IA
-- [x] Tests con Vitest de o05 y o06 (`npm test`, 23 tests en verde)
-- [x] o06 · Historial del carrito con undo (`createCartHistory`, con un closure)
-- [x] o09 · `groupByRoast` con `reduce`, sin mutar el acumulador
-- [x] o09 · `sortBy` genérico con `keyof`, sin mutar (`toSorted` + `localeCompare`)
+- [x] p1  · Tests con Vitest de o05 y o06 (`npm test`, 23 tests en verde)
+- [x] p2  · Historial del carrito con undo (`createCartHistory`, con un closure)
+- [x] p3  · `groupByRoast` con `reduce`, sin mutar el acumulador
+- [x] p4 · `sortBy` genérico con `keyof`, sin mutar (`toSorted` + `localeCompare`)
+- [x] p7 · Modelad los datos de vuestro TFM (`tfm-types.ts`)
+- [x] d4 · Un pedido como en React (reducer con Immer)
 
 ## 🤖 Bitácora de IA
 
@@ -110,7 +112,7 @@ Las respuestas están como comentarios en el código, junto a la kata a la que c
 
 #### Prompt
 
-«En el fichero o05-arrays.ts. Ni un solo bucle: usad filter, map, toSorted, reduce, some, every y find. […] catalogLabels(list: Coffee[]): string[] → los disponibles, ordenados por precio de menor a mayor y convertidos con coffeeCard. En una sola cadena: filter → toSorted → map.»
+«En el fichero o05-arrays.ts. Ni un solo bucle: usa filter, map, toSorted, reduce, some, every y find. […] catalogLabels(list: Coffee[]): string[] → los disponibles, ordenados por precio de menor a mayor y convertidos con coffeeCard. En una sola cadena: filter → toSorted → map.»
 
 #### Qué me dio
 
@@ -124,7 +126,7 @@ Antes de darlo por bueno quise ver ese efecto, así que cambié `toSorted` por `
 
 #### Prompt
 
-«En el fichero o04-opcionales.ts. […] wantsNewsletter(customer: Customer): boolean → su preferencia, o true por defecto. […] Usad ?. y ??, sin ningún if.»
+«En el fichero o04-opcionales.ts. […] wantsNewsletter(customer: Customer): boolean → su preferencia, o true por defecto. […] Usa ?. y ??, sin ningún if.»
 
 #### Qué me dio
 
@@ -132,7 +134,7 @@ Antes de darlo por bueno quise ver ese efecto, así que cambié `toSorted` por `
 
 #### Qué corregí y por qué
 
-No me bastaba con la explicación y quise verlo. Escribí `wantsNewsletterError` con `||` y la probé con Lucía. Devuelve `true`, así que la apuntaría a una newsletter que ha rechazado. La dejé en el fichero como contraejemplo, con un comentario.
+Escribí `wantsNewsletterError` con `||` y la probé con Lucía. Devuelve `true`, así que la apuntaría a una newsletter que ha rechazado. La dejé en el fichero como contraejemplo, con un comentario.
 
 ### 3 · Comprobar que el compilador avisa
 
@@ -152,7 +154,7 @@ En los dos casos lo comprobé quitando un caso a mano. Sin uno de los `case`, el
 
 #### Prompt
 
-«Para cada función, poner un comentario diciendo si es pura o impura y qué condición rompe. Después, escribid una versión pura de las impuras.»
+«Para cada función, poner un comentario diciendo si es pura o impura y qué condición rompe. Después, escribe una versión pura de las impuras.»
 
 #### Qué me dio
 
@@ -160,4 +162,4 @@ Las seis funciones comentadas, las cuatro versiones puras y un bloque `export { 
 
 #### Qué corregí y por qué
 
-Quité el bloque `export`, porque el ejercicio no lo pedía. Entonces `tsc` empezó a dar cuatro errores TS6133: las funciones impuras ya no se usaban en ningún sitio. La IA me avisó en la siguiente kata y lo arreglé. Aprendí que con `noUnusedLocals` cualquier código muerto rompe la compilación. Al cerrar el lab hubo que hacer la misma limpieza en `o10-closures.ts`, donde habían quedado dos imports sin usar.
+Quité el bloque `export`, porque el ejercicio no lo pedía. Entonces `tsc` empezó a dar cuatro errores TS6133: las funciones impuras ya no se usaban en ningún sitio. La IA me avisó en la siguiente kata y lo arreglé.
